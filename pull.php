@@ -3,21 +3,21 @@
 task( 'pull:database', function () {
 
     writeln( 'Creating a new database dump on the remote server' );
-    run( 'mysqldump {{pull.name}} > /tmp/{{pull.name}}.sql' );
+    run( 'mysqldump {{remote.database}} > /tmp/{{remote.name}}.sql' );
     writeln( 'Getting database dump from the remote server' );
-    runLocally( 'scp {{pull.remote_ssh}}:/tmp/{{pull.name}}.sql {{pull.name}}.sql' );
+    runLocally( 'scp {{remote.ssh}}:/tmp/{{remote.name}}.sql {{remote.name}}.sql' );
     writeln( 'Restore remote database to local database' );
-    runLocally( 'cd web && wp db import ../{{pull.name}}.sql' );
+    runLocally( 'cd web && wp db import ../{{remote.name}}.sql' );
     writeln( 'Search and replace urls in the imported database to local urls' );
-    runLocally( 'cd web && wp search-replace www.{{pull.remote_domain}} {{pull.local}}' );
-    runLocally( 'cd web && wp search-replace {{pull.remote_domain}} {{pull.local}}' );
+    runLocally( 'cd web && wp search-replace www.{{remote.domain}} {{local.domain}}' );
+    runLocally( 'cd web && wp search-replace {{remote.domain}} {{local.domain}}' );
 
 } );
 
 task( 'pull:files', function () {
 
     writeln( 'Getting uploads, long duration first time! (approx. 60s)' );
-    runLocally( 'rsync -re ssh {{pull.remote_ssh}}:{{pull.remote_path}}/shared/web/app/uploads web/app' );
+    runLocally( 'rsync -re ssh {{remote.ssh}}:{{remote.path}}/shared/web/app/uploads web/app' );
 
 } );
 
@@ -31,7 +31,7 @@ task( 'pull:elastic', function () {
 task( 'pull:cleanup', function () {
 
     writeln( 'Cleaning up locally...' );
-    runLocally( 'rm {{pull.name}}.sql' );
+    runLocally( 'rm {{remote.name}}.sql' );
     writeln( 'Permalinks rewrite/flush' );
     runLocally( 'cd web && wp rewrite flush' );
     writeln( 'Activate query monitor' );
