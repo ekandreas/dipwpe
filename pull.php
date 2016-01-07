@@ -17,8 +17,8 @@ task( 'pull:restore_database', function () {
 
 task( 'pull:search_and_replace_database', function () {
     writeln( 'Search and replace urls in the imported database to local urls' );
-    runLocally( 'cd web && wp search-replace www.{{remote.domain}} {{local.domain}}' );
-    runLocally( 'cd web && wp search-replace {{remote.domain}} {{local.domain}}' );
+    runLocally( 'cd web && wp search-replace www.{{remote.domain}} {{local.domain}}', 999 );
+    runLocally( 'cd web && wp search-replace {{remote.domain}} {{local.domain}}', 999 );
 } );
 
 task( 'pull:files', function () {
