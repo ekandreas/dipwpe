@@ -16,7 +16,7 @@ task( 'init:wp', function () {
 task( 'init:pull', function () {
 
     writeln( 'Pull remote version of WP' );
-    runLocally( 'dep pull production' );
+    runLocally( 'dep pull production', 999 );
 
 } );
 
