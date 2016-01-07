@@ -23,8 +23,10 @@ task( 'pull:files', function () {
 
 task( 'pull:elastic', function () {
 
-    writeln( 'Setup elasticsearch and elasticpress' );
-    runLocally( 'cd web && wp elasticpress index --setup' );
+    if( env('local.is_elastic') ) {
+        writeln( 'Setup elasticsearch and elasticpress' );
+        runLocally( 'cd web && wp elasticpress index --setup' );
+    }
 
 } );
 

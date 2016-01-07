@@ -13,6 +13,7 @@ env('remote.ssh','root@c6889.cloudnet.se');
 env('remote.database','orasolvinfo');
 env('remote.domain','orasolv.info');
 env('local.domain','intra.dev');
+env('local.is_elastic',true);
 
  */
 include_once 'init.php';
