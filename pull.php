@@ -40,6 +40,10 @@ task( 'pull:cleanup', function () {
     runLocally( 'cd web && wp rewrite flush' );
     writeln( 'Activate query monitor' );
     runLocally( 'cd web && wp plugin activate query-monitor' );
+    if( file_exists('web/app/uploads/.cache/') ) {
+        writeln( 'Empty Bladerunner cache' );
+        array_map('unlink', glob("web/app/uploads/.cache/*.*"));
+    }
 } );
 
 task( 'pull', [
