@@ -23,7 +23,7 @@ task('pull:search_and_replace_database', function () {
 
 task('pull:files', function () {
     writeln('Getting uploads, long duration first time! (approx. 60s)');
-    runLocally('rsync -re ssh {{remote.ssh}}:{{remote.path}}/shared/web/app/uploads web/app', 999);
+    runLocally('rsync --exclude .cache -re ssh {{remote.ssh}}:{{remote.path}}/shared/web/app/uploads web/app', 999);
 });
 
 task('pull:elastic', function () {
