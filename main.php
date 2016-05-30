@@ -16,5 +16,6 @@ env('local.domain','intra.dev');
 env('local.is_elastic',true);
 
  */
+include_once 'common.php';
 include_once 'init.php';
 include_once 'pull.php';
